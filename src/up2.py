@@ -40,15 +40,17 @@ _, tip = sim.simxGetObjectHandle(clientID,'youBot_positionTip',sim.simx_opmode_b
 _, target = sim.simxGetObjectHandle(clientID,'youBot_positionTarget',sim.simx_opmode_blocking)
 
 # Start Driving
-#sim.simxSetJointTargetVelocity(clientID, wheelJoints[0], 0.5, sim.simx_opmode_streaming)
-#sim.simxSetJointTargetVelocity(clientID, wheelJoints[1], 0.5, sim.simx_opmode_streaming)
-#sim.simxSetJointTargetVelocity(clientID, wheelJoints[2], 0.5, sim.simx_opmode_streaming)
-#sim.simxSetJointTargetVelocity(clientID, wheelJoints[3], 0.5, sim.simx_opmode_streaming)
-sim.simxSetJointTargetVelocity(clientID, tip, 1, sim.simx_opmode_streaming)
+sim.simxSetJointTargetVelocity(clientID, wheelJoints[0], 0.5, sim.simx_opmode_streaming)
+sim.simxSetJointTargetVelocity(clientID, wheelJoints[1], 0.5, sim.simx_opmode_streaming)
+sim.simxSetJointTargetVelocity(clientID, wheelJoints[2], 0.5, sim.simx_opmode_streaming)
+sim.simxSetJointTargetVelocity(clientID, wheelJoints[3], 0.5, sim.simx_opmode_streaming)
+#sim.simxSetJointTargetVelocity(clientID, tip, 1, sim.simx_opmode_streaming)
 print('Start Driving')
+
+
 # Now retrieve streaming data (i.e. in a non-blocking fashion):
 startTime=time.time()
-sim.simxGetIntegerParameter(clientID,sim.sim_intparam_mouse_x,sim.simx_opmode_streaming) # Initialize streaming
+#sim.simxGetIntegerParameter(clientID,sim.sim_intparam_mouse_x,sim.simx_opmode_streaming) # Initialize streaming
 """
 while time.time()-startTime < 5:
     returnCode,data=sim.simxGetIntegerParameter(clientID,sim.sim_intparam_mouse_x,sim.simx_opmode_buffer) # Try to retrieve the streamed data
