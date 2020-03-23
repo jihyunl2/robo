@@ -67,6 +67,7 @@ for i in range(16):
 _, targetPosition = sim.simxGetJointPosition(clientID, leftMotor,sim.simx_opmode_streaming)
 
 minDetection = 0.2
+maxDetection = 0.5
 stepSize = 1.0
 
 while(True):
@@ -82,10 +83,11 @@ while(True):
         righttargetPosition = np.array(sim.simxGetJointPosition(clientID, rightMotor,sim.simx_opmode_buffer))
         targetPosition = (lefttargetPosition+righttargetPosition)/2.0
         """
-        
-        distance = np.linalg.norm(detectionPoint)
+        if detectionState[i]==False:
+            distace = maxDetection
+        else:
+            distance = np.linalg.norm(detectionPoint)
         senseDistance = np.append(senseDistance, distance)
-
 
     if np.min(senseDistance) < minDetection:
         sim.simxSetJointTargetVelocity(clientID, leftMotor, 0, sim.simx_opmode_streaming)
