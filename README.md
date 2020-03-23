@@ -1,5 +1,9 @@
-# HIT OR MISS
-# Our robot will hit an incoming object with a bat or 
-# catch the object with a loop depending on the implementation of the project.
-# The (vision) sensors placed on the ground will be used to estimate the trajectory of the object in the 3D space. 
-# The robot will use the prediction to either hit or catch the object with accuracy. 
+# MAZE SOLVE 
+# Our P3DX ROBOT  will solve a maze environment using the BFS Algorithm.
+# 
+# Sense Walls:
+# It will read values from the ultrasonic sensors to find the distance to the detected object. If the distance is less than 0.2, it has sensed a wall. 
+# Current Implementation: 
+# Robot immediately stops after detection of robot
+# Future Implementation:
+# Robot should return one step to its previous location and return to search.  
