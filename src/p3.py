@@ -55,8 +55,8 @@ end
 """
 
 # Start Driving
-sim.simxSetJointTargetVelocity(clientID, leftMotor, 0.3, sim.simx_opmode_streaming)
-sim.simxSetJointTargetVelocity(clientID, rightMotor, 0.3, sim.simx_opmode_streaming)
+sim.simxSetJointTargetVelocity(clientID, leftMotor, 0.7, sim.simx_opmode_streaming)
+sim.simxSetJointTargetVelocity(clientID, rightMotor, 0.7, sim.simx_opmode_streaming)
 print('Start Driving')
 
 detectionState = [False]*16
@@ -66,7 +66,7 @@ for i in range(16):
     _, detectionState[i], detectionPoint, detectedObjectHandle, detectedSurfaceNormalVector =  sim.simxReadProximitySensor(clientID, usensor[i], sim.simx_opmode_streaming)
 _, targetPosition = sim.simxGetJointPosition(clientID, leftMotor,sim.simx_opmode_streaming)
 
-minDetection = 0.2
+minDetection = 0.4
 maxDetection = 0.5
 stepSize = 1.0
 
@@ -78,13 +78,9 @@ while(True):
         
         _, usensor[i] = sim.simxGetObjectHandle(clientID, 'Pioneer_p3dx_ultrasonicSensor'+str(i+1), sim.simx_opmode_blocking)
         _, detectionState[i], detectionPoint, detectedObjectHandle, detectedSurfaceNormalVector =  sim.simxReadProximitySensor(clientID, usensor[i], sim.simx_opmode_buffer)
-        """
-        lefttargetPosition = np.array(sim.simxGetJointPosition(clientID, leftMotor,sim.simx_opmode_buffer))
-        righttargetPosition = np.array(sim.simxGetJointPosition(clientID, rightMotor,sim.simx_opmode_buffer))
-        targetPosition = (lefttargetPosition+righttargetPosition)/2.0
-        """
+
         if detectionState[i]==False:
-            distace = maxDetection
+            distance = maxDetection
         else:
             distance = np.linalg.norm(detectionPoint)
         senseDistance = np.append(senseDistance, distance)
